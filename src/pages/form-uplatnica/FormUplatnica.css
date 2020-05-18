@@ -1,0 +1,10 @@
+.forma {
+    background-color: #333333;
+    border: 3px solid #F1AE5C;
+    color: #F1AE5C;
+}
+
+.button:hover {
+    border-left: 2px solid #F1AE5C;
+    border-right: 2px solid #F1AE5C;
+}

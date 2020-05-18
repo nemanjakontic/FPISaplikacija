@@ -1,0 +1,24 @@
+.header {
+    height: 56px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333333;
+    border-bottom: 5px solid #F1AE5C;
+    color: #F1AE5C;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.header nav {
+    height: 100%;
+}
+
+@media (max-width: 499px) {
+    .desktopOnly {
+        display: none;
+    }
+}
