@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 
@@ -39,9 +39,29 @@ const App = () => {
         new Uplatnica('5', '26-09-2015', 1200, new Clan('3', 'Sofija', 'Milosevic', '30-12-1995', 'https://pbs.twimg.com/media/Cjx5kpZUoAIqfAK.jpg'))
     ];
 
+    const [uplatnice, setUplatnice] = useState<Uplatnica[]>([]);
+
     const onAddUplata = (uplata: Uplatnica) => {
-        
+        const id = UPLATNICE.length + 1;
+        uplata.uplatnicaId = id + "";
+        UPLATNICE.push(uplata);
+        // setUplatnice([...uplatnice, uplata]); // ovo proveriti
+        dovuciPodatke();
+        console.log(uplatnice);
     }
+
+    const dovuciPodatke = () => {
+        const uplatnice1 = UPLATNICE;
+        setUplatnice(uplatnice1);
+    }
+
+    useEffect(() => {
+        const dovuciPodatke = () => {
+            const uplatnice1 = UPLATNICE;
+            setUplatnice(uplatnice1);
+        }
+        dovuciPodatke();
+    }, []);
 
     return (
         <Router>
@@ -49,7 +69,7 @@ const App = () => {
                 <Layout>
                     <Switch>
                         <Route path="/" render={() => (<Home clanovi={CLANOVI}/>)} exact/>
-                        <Route path="/:clanID/uplate" render={() => (<Uplate uplatnice={UPLATNICE} />)} exact/>
+                        <Route path="/:clanID/uplate" render={(props) => (<Uplate {...props} uplatnice={uplatnice} />)} exact/>
                         <Route path="/uplate/nova" render={() => (<FormUplatnica clanovi={CLANOVI} onAddUplata={onAddUplata}/>)} exact/>
                         <Redirect to="/"/>
                     </Switch>

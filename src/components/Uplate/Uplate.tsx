@@ -28,7 +28,7 @@ const Uplate = (props: any) => {
 
     // const clanID = useParams().clanID;
     const clanID = props.match.params.clanID;
-    console.log(clanID);
+    // console.log(clanID);
     const uplateZaClana = props.uplatnice.filter((uplatnica: Uplatnica) => uplatnica.clan.clanId === clanID);
 
     return (

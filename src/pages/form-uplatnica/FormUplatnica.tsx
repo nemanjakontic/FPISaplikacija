@@ -10,8 +10,8 @@ import {Uplatnica} from "../../modeli/Uplatnica";
 
 const FormUplatnica = (props: any) => {
     let [datumUplate, setDatumUplate] = useState<string>('');
-    let [clan, setClan] = useState<Clan | null>(null);
-    let [svrhaUplate, setSvrhaUplate] = useState<string>('');
+    let [clan, setClan] = useState<Clan | null>(props.clanovi[0]);
+    // let [svrhaUplate, setSvrhaUplate] = useState<string>('');
     let [iznosUplate, setIznosUplate] = useState<number>(0);
 
     const onChangeClanHandler = (event: any) => {
@@ -21,8 +21,9 @@ const FormUplatnica = (props: any) => {
 
     const onAddUplataHandler = (e: any) => {
         e.preventDefault();
-        console.log(datumUplate + " " + clan?.ime + " " + clan?.prezime + " " + svrhaUplate + " " + iznosUplate);
-        if(datumUplate !== '' && clan !== null && svrhaUplate !== '') {
+        console.log(datumUplate + " " + clan?.ime + " " + clan?.prezime + " " + iznosUplate);
+        if(datumUplate !== '' && clan !== null) {
+            console.log('usao');
             props.onAddUplata(new Uplatnica('0', datumUplate, iznosUplate, clan));
         }
     }
@@ -57,15 +58,15 @@ const FormUplatnica = (props: any) => {
                                ))}
                            </select>
                        </div>
-                       <div className="form-group">
-                           <label htmlFor="svrha">Svrha uplate:</label>
-                           <textarea
-                               id="svrha"
-                               className="form-control"
-                               value={svrhaUplate}
-                               onChange={(e) => setSvrhaUplate(e.target.value)}
-                           />
-                       </div>
+                       {/*<div className="form-group">*/}
+                       {/*    <label htmlFor="svrha">Svrha uplate:</label>*/}
+                       {/*    <textarea*/}
+                       {/*        id="svrha"*/}
+                       {/*        className="form-control"*/}
+                       {/*        value={svrhaUplate}*/}
+                       {/*        onChange={(e) => setSvrhaUplate(e.target.value)}*/}
+                       {/*    />*/}
+                       {/*</div>*/}
                        <div className="form-group">
                            <label htmlFor="iznos">Iznos uplate:</label>
                            <input
