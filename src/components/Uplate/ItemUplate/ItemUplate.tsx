@@ -11,6 +11,7 @@ const ItemUplate = (props:any) => {
                         <Card.Subtitle>{props.uplatnica.datumUplate}</Card.Subtitle>
                         <h4>Iznos uplate: {props.uplatnica.iznos}</h4>
                     </Card.Body>
+                    <button className="button-big" onClick={() => props.show(props.uplatnica.uplatnicaId)}>PRIKAZI UPLATU</button>
                 </Card>
             </div>
         </>

@@ -17,3 +17,7 @@
     color: #333333;
     border: 3px solid #333333;
 }
+
+.container {
+    z-index: 100;
+}

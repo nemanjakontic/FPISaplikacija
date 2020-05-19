@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 
 import ListUplate from "./ListUplate/ListUplate";
 import {Uplatnica} from "../../modeli/Uplatnica";
 
 import './Uplate.css';
 import {Link} from "react-router-dom";
+import DetailsUplata from "./DetailsUplata/DetailsUplata";
+import Modal from "react-bootstrap/Modal";
 
 const Uplate = (props: any) => {
     // const UPLATNICE = [
@@ -26,21 +28,46 @@ const Uplate = (props: any) => {
     //     new Uplatnica('5', '26-09-2015', 1200, new Clan('3', 'Sofija', 'Milosevic', '30-12-1995', 'https://pbs.twimg.com/media/Cjx5kpZUoAIqfAK.jpg'))
     // ];
 
-    // const clanID = useParams().clanID;
+    const [showModalUplata, setShowModalUplata] = useState<boolean>(false);
+    const [uplataZaPrikaz, setUplataZaPrikaz] = useState<Uplatnica | null>(null);
+
     const clanID = props.match.params.clanID;
-    // console.log(clanID);
     const uplateZaClana = props.uplatnice.filter((uplatnica: Uplatnica) => uplatnica.clan.clanId === clanID);
+
+    const showModal = (id: string) => {
+        uplateZaClana.filter((uplatnica: Uplatnica) => uplatnica.uplatnicaId === id && setUplataZaPrikaz(uplatnica));
+        setShowModalUplata(true);
+        console.log("modal - id:" + id);
+    }
+
+    const handleClose = () => setShowModalUplata(false);
 
     return (
         <>
-            <div className="container">
-                <div className="row mb-3">
-                    <Link to="/uplate/nova" className="button-big">KREIRAJ UPLATNICU</Link>
+            <>
+                <div className="container">
+                    <div className="row mb-3">
+                        <Link to="/uplate/nova" className="button-big">KREIRAJ UPLATNICU</Link>
+                    </div>
+                    <div className="row mt-3">
+                        <ListUplate uplatnice={uplateZaClana} show={(id: string) => showModal(id)}/>
+                    </div>
                 </div>
-                <div className="row mt-3">
-                    <ListUplate uplatnice={uplateZaClana}/>
-                </div>
-            </div>
+            </>
+            {/*<Modal show={showModalUplata}>*/}
+            {/*    <DetailsUplata uplatnica={uplataZaPrikaz}/>*/}
+            {/*</Modal>*/}
+
+            <Modal show={showModalUplata} onHide={handleClose}>
+                <DetailsUplata
+                    uplatnica={uplataZaPrikaz}
+                    handleClose={handleClose}
+                    deleteUplata={(id: string) => {
+                        props.delete(id);
+                        handleClose();
+                    }}
+                />
+            </Modal>
         </>
     );
 }

@@ -14,6 +14,7 @@ const ListUplate = (props:any) => {
                 <ItemUplate
                     key={uplatnica.uplatnicaId}
                     uplatnica={uplatnica}
+                    show={(id:string) => props.show(id)}
                 />
             ))}
         </>

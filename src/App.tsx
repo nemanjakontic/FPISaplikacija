@@ -45,9 +45,14 @@ const App = () => {
         const id = UPLATNICE.length + 1;
         uplata.uplatnicaId = id + "";
         UPLATNICE.push(uplata);
-        // setUplatnice([...uplatnice, uplata]); // ovo proveriti
+        setUplatnice([...uplatnice, {...uplata}]); // ovo proveriti
         dovuciPodatke();
         console.log(uplatnice);
+    }
+
+    const onDeleteUplataHandler = (id: string) => {
+        const sveUplatnice = uplatnice.filter(uplatnica => uplatnica.uplatnicaId !== id);
+        setUplatnice(sveUplatnice);
     }
 
     const dovuciPodatke = () => {
@@ -56,26 +61,37 @@ const App = () => {
     }
 
     useEffect(() => {
+        console.log("pokrenut use effect");
         const dovuciPodatke = () => {
             const uplatnice1 = UPLATNICE;
             setUplatnice(uplatnice1);
         }
         dovuciPodatke();
+        console.log(UPLATNICE);
     }, []);
 
     return (
-        <Router>
-            <div>
-                <Layout>
-                    <Switch>
-                        <Route path="/" render={() => (<Home clanovi={CLANOVI}/>)} exact/>
-                        <Route path="/:clanID/uplate" render={(props) => (<Uplate {...props} uplatnice={uplatnice} />)} exact/>
-                        <Route path="/uplate/nova" render={() => (<FormUplatnica clanovi={CLANOVI} onAddUplata={onAddUplata}/>)} exact/>
-                        <Redirect to="/"/>
-                    </Switch>
-                </Layout>
-            </div>
-        </Router>
+        <>
+            <Router>
+                <div>
+                    <Layout>
+                        <Switch>
+                            <Route path="/" render={() => (<Home clanovi={CLANOVI}/>)} exact/>
+                            <Route path="/:clanID/uplate"
+                                   render={(props) => (<Uplate
+                                       {...props}
+                                       uplatnice={uplatnice}
+                                       delete={(id: string) => onDeleteUplataHandler(id)}
+                                       />
+                                       )} exact/>
+                            <Route path="/uplate/nova"
+                                   render={() => (<FormUplatnica clanovi={CLANOVI} onAddUplata={onAddUplata}/>)} exact/>
+                            <Redirect to="/"/>
+                        </Switch>
+                    </Layout>
+                </div>
+            </Router>
+        </>
     );
 }
 

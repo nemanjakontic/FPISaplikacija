@@ -1,0 +1,51 @@
+.button {
+    background-color: #F1AE5C;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    width: 100%;
+    margin: 0;
+    font-weight: bold;
+    color: #333333;
+}
+
+.button-two {
+    background-color: #963606;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    width: 100%;
+    margin: 0;
+    font-weight: bold;
+    color: #F1AE5C;
+}
+
+.button:hover {
+    background-color: #333333;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    width: 100%;
+    margin: 0;
+    font-weight: bold;
+    color: #F1AE5C;
+}
+
+.button-two:hover {
+    background-color: #F1AE5C;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    width: 100%;
+    margin: 0;
+    font-weight: bold;
+    color: #333333;
+}
